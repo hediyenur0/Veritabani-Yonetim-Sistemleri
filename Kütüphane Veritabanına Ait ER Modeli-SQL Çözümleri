@@ -1,0 +1,194 @@
+//1.(UYELER, ADRESLER, KUTUPHANE, Emanet, KİTAPLAR, YAZARLAR, KATEGORİLER, KITAP_KUTUPHANE, KITAP_KATEGORI, KITAP_YAZAR) gösterimini yapınız. 
+//(Tablo isimleri verilmiştir, her tablodaki primary_key(PK) ve foreign_key(FK)’ları gösteriniz.)
+
+CREATE TABLE Adresler(
+    adresNo INT PRIMARY KEY IDENTITY(1,1),
+    sehir NVARCHAR(50),
+    mahalle NVARCHAR(50)
+);
+
+CREATE TABLE Uyeler(
+    uyeNo INT PRIMARY KEY IDENTITY(1,1),
+    uyeAdi NVARCHAR(50),
+    uyeSoyadi NVARCHAR(50),
+    telefon NVARCHAR(50),
+    adresNo INT,
+    FOREIGN KEY (adresNo) REFERENCES Adresler(adresNo)
+);
+
+CREATE TABLE Kutuphane(
+    kutuphaneNo INT PRIMARY KEY,
+    kutuphaneIsmi NVARCHAR(100),
+    adresNo INT,
+    FOREIGN KEY (adresNo) REFERENCES Adresler(adresNo)
+);
+
+CREATE TABLE Kitaplar(
+    ISBN NVARCHAR(50) PRIMARY KEY,
+    kitapAdi NVARCHAR(100),
+    yayinTarihi DATETIME
+);
+
+CREATE TABLE Yazarlar(
+    yazarNo INT PRIMARY KEY IDENTITY(1,1),
+    yazarAdi NVARCHAR(50),
+    yazarSoyadi NVARCHAR(50)
+);
+
+CREATE TABLE Kategori(
+    kategoriNo INT PRIMARY KEY IDENTITY(1,1),
+    kategoriAdi NVARCHAR(50)
+);
+
+CREATE TABLE Emanet(
+    emanetNo INT PRIMARY KEY IDENTITY(1,1),
+    emanetTarihi DATETIME,
+    teslimTarihi DATETIME,
+    uyeNo INT,
+    ISBN NVARCHAR(50),
+    FOREIGN KEY (uyeNo) REFERENCES Uyeler(uyeNo),
+    FOREIGN KEY (ISBN) REFERENCES Kitaplar(ISBN)
+);
+
+CREATE TABLE Kitap_Yazar(
+    id INT PRIMARY KEY IDENTITY(1,1),
+    ISBN NVARCHAR(50),
+    yazarNo INT,
+    FOREIGN KEY (ISBN) REFERENCES Kitaplar(ISBN),
+    FOREIGN KEY (yazarNo) REFERENCES Yazarlar(yazarNo)
+);
+
+CREATE TABLE Kitap_Kategori(
+    id INT PRIMARY KEY IDENTITY(1,1),
+    ISBN NVARCHAR(50),
+    kategoriNo INT,
+    FOREIGN KEY (ISBN) REFERENCES Kitaplar(ISBN),
+    FOREIGN KEY (kategoriNo) REFERENCES Kategori(kategoriNo)
+);
+
+CREATE TABLE Kitap_Kutuphane(
+    id INT PRIMARY KEY IDENTITY(1,1),
+    ISBN NVARCHAR(50),
+    kutuphaneNo INT,
+    FOREIGN KEY (ISBN) REFERENCES Kitaplar(ISBN),
+    FOREIGN KEY (kutuphaneNo) REFERENCES Kutuphane(kutuphaneNo)
+);
+
+//2.UYELER, ADRESLER, KUTUPHANE, Emanet, KİTAPLAR, YAZARLAR, KATEGORİLER, KITAP_KUTUPHANE, KITAP_KATEGORI, KITAP_YAZAR 
+tablolarına 1 kayıt ekleyiniz, güncelleyiniz ve siliniz.
+
+INSERT INTO Uyeler(uyeAdi, uyeSoyadi, telefon, adresNo)
+VALUES ('Ali','Yılmaz','123456',1);
+
+UPDATE Uyeler
+SET telefon = '555666'
+WHERE uyeNo = 1;
+
+DELETE FROM Uyeler
+WHERE uyeNo = 1;
+
+//3.ÜYELER tablosunda kayıtların var olduğu varsayıldığında, kayıtları “UyeNo” sütununa göre 
+artan sırada listelemek için gerekli SQL ifadesini yazınız.
+
+SELECT * 
+FROM Uyeler
+ORDER BY uyeNo ASC;
+
+//4.Ocak 2023 ‘ten sonra emanet alınan kitapları listelemek için gerekli SQL ifadeleri yazınız.
+
+SELECT * 
+FROM Emanet
+WHERE emanetTarihi > '2023-01-01';
+
+//5.Kayseri’de ikamet eden ve telefonu içerisinde 6 içeren üyeleri listelemek için gerekli SQL ifadesini yazınız.
+
+SELECT * 
+FROM Uyeler U
+JOIN Adresler A ON U.adresNo = A.adresNo
+WHERE A.sehir = 'Kayseri'
+AND U.telefon LIKE '%6%';
+
+//6.Teslim tarihi 1 ay dan az kalan kitapları listelemek için gerekli SQL ifadesini yazınız.
+
+SELECT * 
+FROM Emanet
+WHERE DATEDIFF(DAY, GETDATE(), teslimTarihi) < 30;
+
+//7.Soyadı beş karakterden fazla olan müşterilerin ad ve soyad bilgisini adının ilk harfini ve soyadının ilk beş karakterini 
+birleştirerek tek bir sütunda adına göre alfabetik sırada listelemek için gerekli SQL ifadesini yazınız.
+
+SELECT 
+LEFT(uyeAdi,1) + LEFT(uyeSoyadi,5) AS AdSoyad
+FROM Uyeler
+WHERE LEN(uyeSoyadi) > 5
+ORDER BY uyeAdi ASC;
+
+//8.Üyelerin sadece “Sehir” bilgisini alfabetik olarak listelemek için gerekli SQL ifadesini yazınız.
+
+SELECT sehir 
+FROM Adresler
+ORDER BY sehir ASC;
+
+//9.2020 yılında yapılan emanet sayısını bulmak için gerekli SQL ifadesini yazınız.
+
+SELECT COUNT(*) 
+FROM Emanet
+WHERE YEAR(emanetTarihi) = 2020;
+
+//10.Emanet alınan kütüphanenin ismi “Kayseri Belediyesi Merkez Kütüphanesi” olan kitapların 
+emanet süresi 6 aydan fazla olan alımları listelemek için gerekli SQL ifadesini yazınız.
+
+SELECT E.*
+FROM Emanet E
+JOIN Kitap_Kutuphane KK ON E.ISBN = KK.ISBN
+JOIN Kutuphane K ON KK.kutuphaneNo = K.kutuphaneNo
+WHERE K.kutuphaneIsmi = 'Kayseri Belediyesi Merkez Kütüphanesi'
+AND DATEDIFF(MONTH, E.emanetTarihi, E.teslimTarihi) > 6;
+
+//11.Eskişehir’de yaşayan üyelerin sayısını bulmak için gerekli SQL ifadesini yazınız.
+
+SELECT COUNT(*)
+FROM Uyeler U
+JOIN Adresler A ON U.adresNo = A.adresNo
+WHERE A.sehir = 'Eskişehir';
+
+//12.“YayınTarihi” 3 yaşından büyük olan kitapların yazar bilgisini listelemek için gerekli SQL ifadesini yazınız.
+
+SELECT Y.*
+FROM Kitaplar K
+JOIN Kitap_Yazar KY ON K.ISBN = KY.ISBN
+JOIN Yazarlar Y ON KY.yazarNo = Y.yazarNo
+WHERE DATEDIFF(YEAR, K.yayinTarihi, GETDATE()) > 3;
+
+//13.Her bir kitabın emanet edildiği sürelerin en uzun ve en kısa olanları bulunuz.
+
+SELECT 
+MAX(DATEDIFF(DAY, emanetTarihi, teslimTarihi)) AS EnUzun,
+MIN(DATEDIFF(DAY, emanetTarihi, teslimTarihi)) AS EnKisa
+FROM Emanet;
+
+//14.Emanet verilen kitapları, emanet alan üyelerin ad ve soyad bilgisini listelemek için gerekli SQL ifadesini yazınız.
+
+SELECT U.uyeAdi, U.uyeSoyadi, K.kitapAdi
+FROM Emanet E
+JOIN Uyeler U ON E.uyeNo = U.uyeNo
+JOIN Kitaplar K ON E.ISBN = K.ISBN;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
