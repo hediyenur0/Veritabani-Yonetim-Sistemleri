@@ -1,9 +1,8 @@
-# Veritabanı Yönetim Sistemleri | Database Management Systems
-- **Bu repository, Veritabanı Yönetim Sistemleri (VTYS) dersi kapsamında hazırlanan SQL çalışmaları, veritabanı tasarımları, örnekler ve projeleri içermektedir.**
-
+# Database Management Systems | Veritabanı Yönetim Sistemleri 
 - **This repository contains SQL exercises, database design studies, examples and projects developed while studying Database Management Systems.**
+- *Bu repository, Veritabanı Yönetim Sistemleri (VTYS) dersi kapsamında hazırlanan SQL çalışmaları, veritabanı tasarımları, örnekler ve projeleri içermektedir.*
 
-## 📚 Contents
+## 📚 Contents | İçerikler
 
 ## SQL
 
@@ -41,7 +40,7 @@
 - Normalization
 - Exercises
 
-## 🗂️ Repository Structure
+## 🗂️ Repository Structure | Repository Yapısı
 
 ```text
 Veritabani-Yonetim-Sistemleri/
@@ -72,18 +71,18 @@ Veritabani-Yonetim-Sistemleri/
 ```
 
 
-## 🛠️ Technologies
+## 🛠️ Technologies | Kullanılan Teknolojiler
 - SQL
 - Microsoft SQL Server
 - Database Design
 - ER Modeling
 
-## 🎯 Purpose
-- **Bu repository'nin amacı, veritabanı yönetimi ve SQL konularında yapılan ders çalışmalarını düzenli bir şekilde saklamak ve zaman içerisinde gelişimi takip etmektir.**
-
+## 🎯 Purpose | Amaç
 - **The main purpose of this repository is to organize database studies and track the learning process over time.**
+- *Bu repository'nin amacı, veritabanı yönetimi ve SQL konularında yapılan ders çalışmalarını düzenli bir şekilde saklamak ve zaman içerisinde gelişimi takip etmektir.*
 
-## 📌 Topics
+
+## 📌 Topics | Konular
 - DDL
 - DML
 - SELECT
@@ -98,6 +97,7 @@ Veritabani-Yonetim-Sistemleri/
 - Normalization
 - Database Design
 
-## 📖 Note
+## 📖 Note | Not
 
 - **The examples in this repository are primarily created for educational and practice purposes as part of Database Management Systems coursework.**
+- *Bu repository'deki örnekler, Veritabanı Yönetim Sistemleri dersi kapsamında eğitim ve uygulama amacıyla hazırlanmıştır.*
