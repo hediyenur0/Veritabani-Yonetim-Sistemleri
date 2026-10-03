@@ -42,31 +42,32 @@
 - Exercises
 
 ## 🗂️ Repository Structure
-- Veritabani-Yonetim-Sistemleri/
-- │
-- ├── resources/
-- │   └── pdf/
-- │
-- ├── sql/
-- │   ├── dml/
-- │   ├── joins/
-- │   ├── queries/
-- │   └── subqueries/
-- │
-- ├── database-design/
-- │   ├── er-diagram/
-- │   └── normalization/
-- │
-- └── projects/
--    ├── gallery-database/
--    │   ├── README.md
--    │   ├── gallery.sql
--    │   └── versions/
--    │       └── gallery-v2.sql
--    │
--    └── library-database/
--        ├── README.md
--        └── library.sql
+Veritabani-Yonetim-Sistemleri/
+│
+├── resources/
+│   └── pdf/
+│
+├── sql/
+│   ├── dml/
+│   ├── joins/
+│   ├── queries/
+│   └── subqueries/
+│
+├── database-design/
+│   ├── er-diagram/
+│   └── normalization/
+│
+└── projects/
+    ├── gallery-database/
+    │   ├── README.md
+    │   ├── gallery.sql
+    │   └── versions/
+    │       └── gallery-v2.sql
+    │
+    └── library-database/
+        ├── README.md
+        └── library.sql
+
 
 ## 🛠️ Technologies
 - SQL
