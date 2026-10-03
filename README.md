@@ -42,7 +42,6 @@
 - Exercises
 
 ## 🗂️ Repository Structure
-## 🗂️ Repository Structure
 
 ```text
 Veritabani-Yonetim-Sistemleri/
