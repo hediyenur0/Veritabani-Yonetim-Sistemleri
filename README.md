@@ -7,7 +7,7 @@
 
 ## SQL
 
-- **SQL ile ilgili temel ve ileri seviye örnekler:**
+**SQL ile ilgili temel ve ileri seviye örnekler:**
 - DDL — Data Definition Language
 - DML — Data Manipulation Language
 - SQL Queries
