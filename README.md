@@ -42,6 +42,9 @@
 - Exercises
 
 ## 🗂️ Repository Structure
+## 🗂️ Repository Structure
+
+```text
 Veritabani-Yonetim-Sistemleri/
 │
 ├── resources/
@@ -67,6 +70,7 @@ Veritabani-Yonetim-Sistemleri/
     └── library-database/
         ├── README.md
         └── library.sql
+```
 
 
 ## 🛠️ Technologies
